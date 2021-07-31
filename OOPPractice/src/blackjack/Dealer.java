@@ -21,4 +21,7 @@ public class Dealer implements Participant{
 		this.point = point;
 	}
 	
+	public String getName() {
+		return "Dealer";
+	}
 }

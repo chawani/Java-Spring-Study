@@ -6,4 +6,5 @@ public interface Participant {
 	public void setMy_card(Card card);
 	public int getPoint();
 	public void setPoint(int point);
+	public String getName();
 }

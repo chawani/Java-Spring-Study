@@ -6,7 +6,16 @@ public class CardDeck {
 	private ArrayList<Card> card_deck=new ArrayList<>();
 	
 	public CardDeck() {
+		card_deck=makeCard();
+	}
+
+	public ArrayList<Card> getCard_deck() {
+		return card_deck;
+	}
+	
+	public ArrayList<Card> makeCard() {
 		String[] suit={"SPADE","HEART","DIAMOND","CLUB"};
+		ArrayList<Card> deck=new ArrayList<>();
 		Card card;
         for (String s : suit) {
             for(int j=1;j<14;j++) {
@@ -26,12 +35,9 @@ public class CardDeck {
             			card=new Card(s,Integer.toString(j));
             			break;
             	}
-            	card_deck.add(card);
+            	deck.add(card);
             }
         }
-	}
-
-	public ArrayList<Card> getCard_deck() {
-		return card_deck;
+        return deck;
 	}
 }

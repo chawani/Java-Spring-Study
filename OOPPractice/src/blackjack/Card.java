@@ -3,6 +3,7 @@ package blackjack;
 public class Card {
 	private String suit;//모양
 	private String character;//기호
+	
 	public Card(String suit, String character) {
 		super();
 		this.suit = suit;
@@ -13,16 +14,8 @@ public class Card {
 		return suit;
 	}
 
-	public void setSuit(String suit) {
-		this.suit = suit;
-	}
-
 	public String getCharacter() {
 		return character;
-	}
-
-	public void setCharacter(String character) {
-		this.character = character;
 	}
 
 	@Override

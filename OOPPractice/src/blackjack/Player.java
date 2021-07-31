@@ -21,4 +21,7 @@ public class Player implements Participant{
 		this.point = point;
 	}
 	
+	public String getName() {
+		return "Player";
+	}
 }
