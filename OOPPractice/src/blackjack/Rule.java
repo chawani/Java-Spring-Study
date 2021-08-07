@@ -1,47 +1,40 @@
 package blackjack;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import blackjack.participant.Dealer;
+import blackjack.participant.Participant;
+import blackjack.participant.Player;
 
 public class Rule {
-	
-	public void setPoint(Participant participant,Card card) {
-		int point;
-		point=convertPoint(card.getCharacter());
-		participant.setPoint(participant.getPoint()+point);
+	public boolean checkBust(Participant participant) {
+		if(participant.getMyPoint()>21) {
+			System.out.println(participant.getName()+"님의 Bust");
+			participant.setState("Bust");
+			return true;
+		}
+		return false;
 	}
 	
-	public int convertPoint(String c) {
-		int result=0;
-		switch(c){
-		case "A":
-			Scanner scan = new Scanner(System.in);
-			System.out.println("A카드 점수 선택? 1. 1점 2. 11점");
-			int select = scan.nextInt();
-			if (select==1) {
-				result=1;
-			}else if(select==2) {
-				result=11;
+	public void checkBlackjack(Participant participant) {
+		if(participant.getMyPoint()==21) {
+			System.out.println(participant.getName()+"님의 Blackjack");
+			participant.setState("Blackjack");
+		}
+	}
+	
+	public void judgeAllMatch(Dealer dealer, ArrayList<Player> players) {
+		int dealerPoint = dealer.getMyPoint();
+		for (Player player : players) {
+			int playerPoint = player.getMyPoint();
+			if (player.getState() != null)
+				continue;
+			if (dealer.getState().equals("Bust")) {
+				player.setState("Win");
+				continue;
 			}
-			break;
-		case "J":
-		case "Q":
-		case "K":
-			result=10;
-			break;
-		default:
-			result=Integer.parseInt(c);
-			break;
+			String state = (playerPoint > dealerPoint) ? "Win" : (playerPoint < dealerPoint) ? "Lose" : "Draw";
+			player.setState(state);
 		}
-		return result;
-	}
-	
-	public boolean isBust(Participant participant) {
-		boolean bust=false;
-		if(participant.getPoint()>21) {
-			bust=true;
-			System.out.println(participant.getName()+"의 Bust");
-		}
-		return bust;
 	}
 }
